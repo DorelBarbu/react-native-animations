@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 import Deck from './src/Deck';
-
+import { Card, Button } from 'react-native-elements';
 const DATA = [
   { id: 1, text: 'Card #1', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
   { id: 2, text: 'Card #2', uri: 'http://www.fluxdigital.co/wp-content/uploads/2015/04/Unsplash.jpg' },
@@ -25,10 +25,31 @@ const DATA = [
 ];
 
 export default class App extends Component {
+
+  renderCard(item) {
+    return (
+      <Card
+        key={item.id}
+        title={item.text}
+        image={{ uri: item.uri }}
+
+      >
+        <Text style={{ marginBottom: 10 }}> I can customize the card </Text>
+        <Button
+          backgroundColor='blue'
+          title='View now'
+        />
+      </Card>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Deck />
+        <Deck
+          data={DATA}
+          renderCard={this.renderCard}
+        />
       </View>
     );
   }
